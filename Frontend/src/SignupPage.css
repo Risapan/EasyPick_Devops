@@ -1,0 +1,145 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.signup-page {
+  min-height: 100vh;
+  background: #73d3f6;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 50px;
+  font-family: Inter, sans-serif;
+}
+
+.signup-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.logo {
+  width: 40px;
+  height: 40px;
+}
+.role-icon img {
+  width: 40px;
+  height: 40px;
+  object-fit: contain;
+}
+.signup-header h1 {
+  color: #2563eb;
+  font-size: 32px;
+}
+
+.signup-page h2 {
+  margin-top: 25px;
+  font-size: 38px;
+  font-weight: 700;
+  color: #111827;
+}
+
+.subtitle {
+  color: #6b7280;
+  margin-top: 8px;
+}
+
+.signup-card {
+  width: 420px;
+  background: white;
+  margin-top: 30px;
+  border-radius: 18px;
+  padding: 25px;
+  border: 1px solid #e5e7eb;
+}
+
+.label-top {
+  margin-bottom: 15px;
+  font-weight: 500;
+}
+
+.role-selector {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 25px;
+}
+
+.role-card {
+  flex: 1;
+  border: 2px solid #e5e7eb;
+  border-radius: 14px;
+  padding: 20px;
+  text-align: center;
+  cursor: pointer;
+}
+
+.role-card.active {
+  border-color: #2563eb;
+  background: #eff6ff;
+}
+
+.role-icon {
+  font-size: 30px;
+  margin-bottom: 10px;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+}
+
+label {
+  margin-top: 14px;
+  margin-bottom: 6px;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+input {
+  height: 48px;
+  border: 1px solid #d1d5db;
+  border-radius: 10px;
+  padding: 0 15px;
+  font-size: 14px;
+}
+
+small {
+  margin-top: 8px;
+  color: #6b7280;
+}
+
+button {
+  margin-top: 20px;
+  height: 50px;
+  border: none;
+  border-radius: 10px;
+  background: #2563eb;
+  color: white;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+button:hover {
+  background: #1d4ed8;
+}
+
+.terms {
+  margin-top: 18px;
+  text-align: center;
+  font-size: 12px;
+  color: #6b7280;
+}
+
+.terms a,
+.signin-link a {
+  color: #2563eb;
+  text-decoration: none;
+}
+
+.signin-link {
+  margin-top: 25px;
+  color: #6b7280;
+}
