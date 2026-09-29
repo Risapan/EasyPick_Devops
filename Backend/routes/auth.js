@@ -3,12 +3,11 @@ const router = express.Router();
 const bcrypt = require("bcrypt");
 const db = require("../config/db");
 
-// POST /api/auth/register - Create new user profile
 router.post("/register", async (req, res) => {
   const { name, fullname, email, password, role } = req.body;
   const displayName = (fullname || name || "").trim();
 
-  // 1. Validation
+
   if (!displayName) {
     return res.status(400).json({
       success: false,
@@ -43,7 +42,6 @@ router.post("/register", async (req, res) => {
   const userRole = role === "owner" ? "owner" : "customer";
 
   try {
-    // 2. Check if email already exists
     const checkSql = "SELECT id, email FROM users WHERE email = ?";
     db.query(checkSql, [cleanEmail], async (checkErr, results) => {
       if (checkErr) {

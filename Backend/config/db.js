@@ -10,7 +10,7 @@ const pool = mysql.createPool({
   queueLimit: 0,
 });
 
-// Test connection and auto-initialize tables
+
 pool.getConnection((err, connection) => {
   if (err) {
     console.error("❌ Database connection failed!");
@@ -21,7 +21,7 @@ pool.getConnection((err, connection) => {
 
   console.log(`✅ MySQL Connected successfully to database "${process.env.DB_NAME || "easypick"}"`);
 
-  // Ensure users table exists
+
   const createTableSql = `
     CREATE TABLE IF NOT EXISTS users (
       id INT AUTO_INCREMENT PRIMARY KEY,
