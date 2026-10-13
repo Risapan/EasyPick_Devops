@@ -1,22 +1,22 @@
 services:
   frontend:
-    build: ./frontend
+    build: ./Frontend
     container_name: my-frontend
     ports:
       - "5173:5173"
     volumes:
-      - ./frontend:/app
+      - ./Frontend:/app
       - /app/node_modules
     depends_on:
-      - backend
+      - Backend
 
   backend:
-    build: ./backend
+    build: ./Backend
     container_name: my-backend
     ports:
       - "3000:3000"
     volumes:
-      - ./backend:/app
+      - ./Backend:/app
       - /app/node_modules
     environment:
       NODE_ENV: development
