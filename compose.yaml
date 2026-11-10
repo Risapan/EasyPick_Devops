@@ -24,8 +24,8 @@ services:
       DB_HOST: mysql
       DB_PORT: 3306
       DB_USER: root
-      DB_PASSWORD: Risapan@@2003
-      DB_NAME: easypick
+      DB_PASSWORD: ${MYSQL_ROOT_PASSWORD:?set MYSQL_ROOT_PASSWORD in .env}
+      DB_NAME: ${MYSQL_DATABASE:-easypick}
     depends_on:
       mysql:
         condition: service_healthy
@@ -35,8 +35,8 @@ services:
     container_name: my-mysql
     restart: unless-stopped
     environment:
-      MYSQL_ROOT_PASSWORD: Risapan@@2003
-      MYSQL_DATABASE: easypick
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD:?set MYSQL_ROOT_PASSWORD in .env}
+      MYSQL_DATABASE: ${MYSQL_DATABASE:-easypick}
     ports:
       - "3307:3306"
     volumes:
