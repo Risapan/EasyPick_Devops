@@ -8,15 +8,46 @@ services:
       - ./Frontend:/app
       - /app/node_modules
     depends_on:
-      - Backend
+      - backend
 
   backend:
     build: ./Backend
     container_name: my-backend
     ports:
-      - "3000:3000"
+      - "8000:8000"
     volumes:
       - ./Backend:/app
       - /app/node_modules
     environment:
       NODE_ENV: development
+      PORT: 8000
+      DB_HOST: mysql
+      DB_PORT: 3306
+      DB_USER: root
+      DB_PASSWORD: Risapan@@2003
+      DB_NAME: easypick
+    depends_on:
+      mysql:
+        condition: service_healthy
+
+  mysql:
+    image: mysql:8.4
+    container_name: my-mysql
+    restart: unless-stopped
+    environment:
+      MYSQL_ROOT_PASSWORD: Risapan@@2003
+      MYSQL_DATABASE: easypick
+    ports:
+      - "3307:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+      - ./Backend/schema.sql:/docker-entrypoint-initdb.d/schema.sql:ro
+    healthcheck:
+      test: ["CMD-SHELL", "mysqladmin ping -h localhost -uroot -p\"$$MYSQL_ROOT_PASSWORD\" --silent"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+      start_period: 30s
+
+volumes:
+  mysql_data:
