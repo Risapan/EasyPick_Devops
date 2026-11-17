@@ -1,7 +1,13 @@
 
 pipeline {
-    agent {
-        label 'rootless-docker'
+    agent any
+
+    environment {
+        // Jenkins (brew service) doesn't inherit the shell PATH; Docker Desktop CLI lives here
+        PATH = "${env.HOME}/.docker/bin:/usr/local/bin:/opt/homebrew/bin:${env.PATH}"
+        // Same project name as a manual `docker compose up` in this repo, so fixed
+        // container names (my-frontend/my-backend/my-mysql) don't conflict
+        COMPOSE_PROJECT_NAME = 'easypick_devops'
     }
 
     options {
@@ -32,16 +38,12 @@ pipeline {
                     string(
                         credentialsId: 'mysql-root-password',
                         variable: 'MYSQL_ROOT_PASSWORD'
-                    ),
-                    string(
-                        credentialsId: 'mysql-app-password',
-                        variable: 'MYSQL_PASSWORD'
                     )
                 ]) {
                     sh '''
                         umask 077
-                        printf 'MYSQL_ROOT_PASSWORD=%s\\nMYSQL_PASSWORD=%s\\n' \
-                          "$MYSQL_ROOT_PASSWORD" "$MYSQL_PASSWORD" > .env
+                        printf 'MYSQL_ROOT_PASSWORD=%s\\nMYSQL_DATABASE=easypick\\n' \
+                          "$MYSQL_ROOT_PASSWORD" > .env
                     '''
                 }
             }
