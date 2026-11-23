@@ -8,9 +8,18 @@ const app = express();
 const PORT = process.env.PORT || 8000;
 
 // Enable CORS for frontend requests
+const allowedOrigins = [
+  "http://localhost",
+  "http://localhost:5173",
+  "http://localhost:3000",
+  "http://localhost:8000",
+  "http://127.0.0.1:5173",
+  process.env.FRONTEND_URL
+].filter(Boolean);
+
 app.use(cors({
-  origin: ["http://localhost:5173", "http://localhost:3000", "http://localhost:8000", "http://127.0.0.1:5173"],
-  credentials: true,
+  origin: allowedOrigins,
+  credentials: true
 }));
 
 // Body parsing middleware
